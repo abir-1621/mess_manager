@@ -27,14 +27,14 @@ void main() async {
             create: (context) => LocalizationProvider(),
           )
         ],
-        child: MyApp(),
+        child: const MyApp(),
       ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

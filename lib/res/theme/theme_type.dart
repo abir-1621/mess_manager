@@ -7,5 +7,8 @@ ThemeData lightTheme = ThemeData(
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  primarySwatch: Colors.blueGrey,
+  primarySwatch: Colors.yellow,
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: Colors.tealAccent,
+  ),
 );
