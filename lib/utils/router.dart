@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mess_manager/views/registration/login.dart';
 
 import '../main.dart';
 import '../views/home/details_screen.dart';
@@ -25,7 +26,13 @@ final GoRouter routerConfig = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             return const MyHomePage(title: "title");
           },
-        )
+        ),
+        GoRoute(
+          path: 'login',
+          builder: (BuildContext context, GoRouterState state) {
+            return const Login();
+          },
+        ),
       ],
     ),
   ],
