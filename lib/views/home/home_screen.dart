@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mess_manager/translations/locale_keys.g.dart';
 import 'package:provider/provider.dart';
 import '../../res/theme/theme_manager.dart';
-import 'package:mess_manager/translations/locale_keys.g.dart';
-import 'package:go_router/go_router.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -41,9 +41,13 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(LocaleKeys.homepage_body_txt).tr(),
             ElevatedButton(
               onPressed: () {
-                context.go('/details');
+                final val = '1';
+                context.goNamed("details", params: {'id': '1'});
               },
-              child: const Text("Go to Details"),
+              child: Text(
+                "aa",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
             ),
           ],
         ),

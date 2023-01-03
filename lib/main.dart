@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mess_manager/res/localization/localization_value.dart';
 import 'package:mess_manager/res/theme/theme_manager.dart';
 import 'package:mess_manager/res/theme/theme_type.dart';
-
 import 'package:mess_manager/utils/router.dart';
 import 'package:mess_manager/views/home/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -55,10 +54,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {

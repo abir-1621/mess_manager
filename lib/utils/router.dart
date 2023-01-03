@@ -16,8 +16,10 @@ final GoRouter routerConfig = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'details',
+          name: 'details',
+          path: 'details/:id',
           builder: (BuildContext context, GoRouterState state) {
+            print(state.params["id"]);
             return const DetailsScreen();
           },
         ),
