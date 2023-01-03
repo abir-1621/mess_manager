@@ -6,6 +6,7 @@ import 'package:mess_manager/res/theme/theme_manager.dart';
 import 'package:mess_manager/res/theme/theme_type.dart';
 
 import 'package:mess_manager/utils/router.dart';
+import 'package:mess_manager/views/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -63,12 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MyHomePage(title:"Home Screen"),
-        ),
-      );
+      context.go('/home');
     });
   }
 
