@@ -1,18 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mess_manager/res/localization/localization_value.dart';
 import 'package:mess_manager/res/theme/theme_manager.dart';
 import 'package:mess_manager/res/theme/theme_type.dart';
 import 'package:mess_manager/utils/router.dart';
-import 'package:mess_manager/views/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
+  await EasyLocalization.ensureInitialized();
+
   runApp(
     EasyLocalization(
       supportedLocales: LocalizationProvider().supportedLang,
@@ -29,7 +30,12 @@ void main() async {
             create: (context) => LocalizationProvider(),
           )
         ],
-        child: const MyApp(),
+        child: ScreenUtilInit(
+          designSize: const Size(375, 667),
+          builder: (BuildContext context, Widget? child) {
+            return const MyApp();
+          },
+        ),
       ),
     ),
   );
@@ -66,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      context.pushReplacement('/login');
+      context.pushReplacement('/sign_up');
     });
   }
 

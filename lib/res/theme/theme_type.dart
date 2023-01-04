@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: Colors.blueGrey,
-  textTheme: const TextTheme(
-    bodyText1: TextStyle(fontSize: 25),
+  textTheme: TextTheme(
+    bodyText1: GoogleFonts.roboto(fontSize: 16),
   ),
 );
 
