@@ -78,6 +78,8 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           context.pushReplacement('/home');
         }
+
+
       });
     });
   }
