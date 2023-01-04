@@ -1,9 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mess_manager/utils/globalcolors.dart';
 
 class CustomTextField extends StatefulWidget {
-  const CustomTextField({Key? key}) : super(key: key);
+  String labelText = "";
+  String hintText = "";
+
+  CustomTextField({Key? key, this.labelText = "", this.hintText = ""})
+      : super(key: key);
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -12,30 +18,33 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 0.5.sw,
-      child: const TextField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.red,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.red,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.red,
-            ),
-          ),
-          hintText: 'Enter some text',
-          hintStyle: TextStyle(
-            color: Colors.green,
+    return TextFormField(
+      validator: (value) => value!.isEmpty ? "can't be empty" : null,
+      decoration: InputDecoration(
+        contentPadding:
+            EdgeInsets.symmetric(vertical: 10.0.h, horizontal: 8.0.w),
+        isDense: true,
+        label: Text(
+          widget.labelText,
+          style: GoogleFonts.roboto(),
+        ),
+        hintText: widget.hintText,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).primaryColor,
           ),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.black,
+          ),
+        ),
+        hintStyle: GoogleFonts.roboto(),
       ),
     );
   }
