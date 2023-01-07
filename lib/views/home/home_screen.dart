@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(LocaleKeys.homepage_body_txt).tr(),
             ElevatedButton(
               onPressed: () {
-                final val = '1';
+                const val = '1';
                 context.goNamed("details", params: {'id': '1'});
               },
               child: Text(
