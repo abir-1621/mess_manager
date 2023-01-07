@@ -5,10 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mess_manager/utils/globalcolors.dart';
 
 class CustomTextField extends StatefulWidget {
-  String labelText = "";
-  String hintText = "";
+  String labelText;
+  String hintText ;
+  bool obscure;
+  TextInputType textInputType;
+  TextEditingController? controller;
+  void Function(String)? onChanged;
 
-  CustomTextField({Key? key, this.labelText = "", this.hintText = ""})
+  CustomTextField({Key? key, this.obscure=false, this.labelText = "",
+    this.hintText = "",this.textInputType=TextInputType.text,this.onChanged,this.controller})
+
       : super(key: key);
 
   @override
@@ -19,7 +25,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (value) => value!.isEmpty ? "can't be empty" : null,
+      keyboardType: widget.textInputType,
+      obscureText: widget.obscure,
+      validator: (value) {
+        return value!.isEmpty ? "can't be empty" : null;
+      },
+      controller: widget.controller,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
         contentPadding:
             EdgeInsets.symmetric(vertical: 10.0.h, horizontal: 8.0.w),

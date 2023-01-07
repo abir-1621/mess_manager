@@ -14,6 +14,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +54,10 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
     with WidgetsBindingObserver {
   final _formKey = GlobalKey<FormState>();
   bool isReversed = false;
+  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _cPasswordController = TextEditingController();
+
 
   @override
   void initState() {
@@ -114,38 +120,32 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
                     Padding(
                       padding: EdgeInsets.only(bottom: 10.0.h),
                       child: CustomTextField(
-                        labelText: "Phone",
+                        controller: _numberController,
+                        labelText: "Phone number",
                         hintText: "+88017XXXXXXXXX",
+                        textInputType: TextInputType.number,
+
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: 10.0.h),
                       child: CustomTextField(
+                        controller: _passwordController,
                         labelText: "Password",
                         hintText: "enter your password",
+                        obscure: true,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: 10.0.h),
                       child: CustomTextField(
-                        labelText: "Password",
-                        hintText: "enter your password",
+                        controller: _cPasswordController,
+                        labelText: "Confirm password",
+                        hintText: "confirm your password",
+                        obscure: true,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10.0.h),
-                      child: CustomTextField(
-                        labelText: "Password",
-                        hintText: "enter your password",
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10.0.h),
-                      child: CustomTextField(
-                        labelText: "Password",
-                        hintText: "enter your password",
-                      ),
-                    ),
+
                     Container(
                       width: 80.sw,
                       margin: EdgeInsets.only(top: 16.0.h),
@@ -154,10 +154,18 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             //todo:do something
+
+                            print(_cPasswordController.text.toString());
+                            print(_numberController.text.toString());
+                            print(_passwordController.text.toString());
+
+
+
+
                           }
                         },
                         child: const Text(
-                          'Submit',
+                          'Create account',
                         ),
                       ),
                     ),
