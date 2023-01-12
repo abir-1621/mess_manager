@@ -12,7 +12,12 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
   textTheme: TextTheme(
-    bodyText1: GoogleFonts.roboto(fontSize: 16),
+    bodyText1: GoogleFonts.roboto(),
+    subtitle1: GoogleFonts.roboto(),
+    subtitle2: GoogleFonts.roboto(),
+    headline3: GoogleFonts.roboto(),
+    headline6: GoogleFonts.roboto(),
+
   ),
 );
 

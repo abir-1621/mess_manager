@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mess_manager/service/auth_provider.dart';
 import 'package:mess_manager/translations/locale_keys.g.dart';
 import 'package:provider/provider.dart';
 import '../../res/theme/theme_manager.dart';

@@ -7,15 +7,16 @@ import 'package:go_router/go_router.dart';
 import 'package:mess_manager/res/localization/localization_value.dart';
 import 'package:mess_manager/res/theme/theme_manager.dart';
 import 'package:mess_manager/res/theme/theme_type.dart';
+import 'package:mess_manager/service/auth_provider.dart';
 import 'package:mess_manager/utils/router.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   // Ideal time to initialize
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   runApp(
     EasyLocalization(
       supportedLocales: LocalizationProvider().supportedLang,
@@ -26,11 +27,15 @@ void main() async {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
+            create: (context) => AuthProvider(),
+          ),
+          ChangeNotifierProvider(
             create: (context) => ThemeManager(),
           ),
           ChangeNotifierProvider(
             create: (context) => LocalizationProvider(),
-          )
+          ),
+
         ],
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
@@ -50,6 +55,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
@@ -73,15 +79,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 1), () {
 
       FirebaseAuth.instance
           .authStateChanges()
           .listen((User? user) {
         if (user == null) {
-          context.pushReplacement('/login');
+          context.pushReplacement('/onBoarding');
         } else {
-          context.pushReplacement('/home');
+          context.pushReplacementNamed('otp',params: {'verificationId':"i am not"});
         }
 
 

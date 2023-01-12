@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,10 +8,10 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mess_manager/utils/globalcolors.dart';
 
-import '../../custom_widgets/custom_textfield.dart';
-import '../../custom_widgets/text_field.dart';
-import '../../translations/locale_keys.g.dart';
-import '../../utils/tools.dart';
+import '../../../custom_widgets/custom_textfield.dart';
+import '../../../custom_widgets/text_field.dart';
+import '../../../translations/locale_keys.g.dart';
+import '../../../utils/tools.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -57,6 +58,9 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
     with WidgetsBindingObserver {
   final _formKey = GlobalKey<FormState>();
   bool isReversed = false;
+  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
 
   @override
   void initState() {
@@ -69,7 +73,9 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
   void dispose() {
     // stop Observing the window size changes.
     super.dispose();
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
+    _numberController.dispose();
+    _passwordController.dispose();
   }
 
   @override
@@ -122,6 +128,7 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
                         labelText: "Phone",
                         hintText: "+88017XXXXXXXXX",
                         textInputType: TextInputType.number,
+                        controller: _numberController,
                       ),
                     ),
                     Padding(
@@ -130,6 +137,7 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
                         labelText: "Password",
                         hintText: "enter your password",
                         obscure: true,
+                        controller: _passwordController,
                       ),
                     ),
                     Container(
@@ -137,9 +145,25 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
                       margin: EdgeInsets.only(top: 16.0.h),
                       child: ElevatedButton(
                         // only enable the button if the text is not empty
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             //todo:do something
+                            print('${_numberController.text}@gmail.com');
+                            try {
+                              final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                                  email: 'abir@gmail.com',
+                                  password: '#12345678#'
+                              );
+                              print(credential.user?.uid);
+                            } on FirebaseAuthException catch (e) {
+                              print(e.message);
+                              if (e.code == 'user-not-found') {
+                                print('No user found for that email.');
+                              } else if (e.code == 'wrong-password') {
+                                print('Wrong password provided for that user.');
+                              }
+                            }
+
                           }
                         },
                         child: const Text(
@@ -148,7 +172,7 @@ class _RectangleSingUpWidgetState extends State<RectangleSingUpWidget>
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10.0.h),
+                      padding: EdgeInsets.only(top: 20.0.h),
                       child: RichText(
                         text: TextSpan(
                           text: "Don't have an account? ",

@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mess_manager/views/registration/login.dart';
-import 'package:mess_manager/views/registration/sign_up_screen.dart';
-
+import 'package:mess_manager/features/registration/screens/on_boarding/on_boarding_screen.dart';
+import '../features/registration/screens/number_login.dart';
+import '../features/registration/screens/otp.dart';
+import '../features/registration/screens/sign_up_screen.dart';
+import '../features/registration/screens/user_information_screen.dart';
 import '../main.dart';
 import '../views/home/details_screen.dart';
 import '../views/home/home_screen.dart';
+
 
 /// The route configuration.
 final GoRouter routerConfig = GoRouter(
@@ -33,7 +36,7 @@ final GoRouter routerConfig = GoRouter(
         GoRoute(
           path: 'login',
           builder: (BuildContext context, GoRouterState state) {
-            return const Login();
+            return const UserLogin();
           },
         ),
         GoRoute(
@@ -42,6 +45,29 @@ final GoRouter routerConfig = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             return const SignUpScreen();
           },
+        ),
+        GoRoute(
+          name: "user_info",
+          path: 'user_info',
+          builder: (BuildContext context, GoRouterState state) {
+            return const UserInfromationScreen();
+          },
+        ),
+        GoRoute(
+          name: "otp",
+          path: 'otp/:verificationId',
+          builder: (BuildContext context, GoRouterState state) {
+            return Otp(verificationId: state.params['verificationId']??"");
+          },
+
+        ),
+        GoRoute(
+          name: "onBoarding",
+          path: 'onBoarding',
+          builder: (BuildContext context, GoRouterState state) {
+            return const OnBoardingScreen();
+          },
+
         ),
       ],
     ),
