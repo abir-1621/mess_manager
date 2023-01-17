@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mess_manager/service/auth_provider.dart';
+import 'package:mess_manager/theme/theme_provider.dart';
 import 'package:mess_manager/translations/locale_keys.g.dart';
 import 'package:provider/provider.dart';
-import '../../res/theme/theme_manager.dart';
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Switch(
             value: isDarkMode,
             onChanged: (isDark) {
-              context.read<ThemeManager>().toggleTheme(isDark);
+              context.read<ThemeProvider>().toggleTheme(isDark);
               setState(() {
                 isDarkMode = !isDarkMode;
               });
